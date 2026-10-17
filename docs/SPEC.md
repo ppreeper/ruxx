@@ -115,7 +115,7 @@ When invoked with no subcommand, `ruxx` behaves as `ruxx check`. **[decision]**
 | `--exit-zero` | always exit 0 on findings |
 | `--exit-non-zero-on-fix` | exit 1 if anything was fixed — **implemented** |
 | `--target-version <V>` | Odoo series, e.g. `17.0` — **implemented** |
-| `--exclude` / `--extend-exclude` / `--force-exclude` | file selection |
+| `--exclude` / `--extend-exclude` / `--force-exclude` | file selection; `--force-exclude` also applies `exclude` to paths given explicitly |
 | `--respect-gitignore` / `--no-respect-gitignore` | gitignore handling |
 | `-n, --no-cache` / `--cache-dir <DIR>` | cache control (env `RUXX_NO_CACHE`, `RUXX_CACHE_DIR`) |
 | `-w, --watch` | re-run on file changes |
@@ -312,6 +312,8 @@ Globs are matched against the path relative to the project root. **[decision]**
   component (so `vendor` prunes every `vendor/`), and `**` is supported.
 - **[implemented]** An explicit CLI path that names a file is always analyzed
   unless `force-exclude = true` (or `--force-exclude`); directories are walked.
+  Excludes are matched against the path as given, so a bare name like `vendor`
+  also excludes an explicit `vendor/a.xml`.
 - **[implemented]** Ignore files are honored when `respect-gitignore` is on (the
   default): every `.ignore` and `.gitignore` inside the walked tree (including
   `!` negation and trailing-`/` directory rules; `.ignore` beats `.gitignore`
