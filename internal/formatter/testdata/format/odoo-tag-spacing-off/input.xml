@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="a" model="ir.ui.view"/>
+    <record id="b" model="ir.ui.view"/>
+</odoo>

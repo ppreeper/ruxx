@@ -1,0 +1,68 @@
+# goreleaser configuration for ruxx.
+#
+#   goreleaser check                      # validate this file
+#   goreleaser build --snapshot --clean   # local cross-compile into dist/
+#   goreleaser release --clean            # tag-driven release (CI does this)
+#
+# The version, commit, and date are stamped into internal/version so that
+# `ruxx version` reports the exact build.
+version: 2
+
+project_name: ruxx
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ruxx
+    main: ./cmd/ruxx
+    binary: ruxx
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X github.com/ppreeper/ruxx/internal/version.Version={{ .Version }}
+      - -X github.com/ppreeper/ruxx/internal/version.Commit={{ .ShortCommit }}
+      - -X github.com/ppreeper/ruxx/internal/version.Date={{ .CommitDate }}
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    mod_timestamp: "{{ .CommitTimestamp }}"
+
+archives:
+  - id: ruxx
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+    files:
+      - LICENSE
+      - README.md
+      - docs/SPEC.md
+      - docs/RULES.md
+      - docs/ODOO-HINTS.md
+
+checksum:
+  name_template: checksums.txt
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-dev"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "^ci:"
+      - "^style:"

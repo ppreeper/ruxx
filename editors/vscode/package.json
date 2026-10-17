@@ -1,0 +1,85 @@
+{
+  "name": "ruxx-xml",
+  "displayName": "ruxx — XML linter & formatter",
+  "description": "Odoo-aware XML linting, formatting and quick fixes, powered by the ruxx language server.",
+  "version": "0.1.0",
+  "license": "MIT",
+  "publisher": "ppreeper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ppreeper/ruxx",
+    "directory": "editors/vscode"
+  },
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Linters",
+    "Formatters"
+  ],
+  "keywords": [
+    "xml",
+    "odoo",
+    "lint",
+    "formatter",
+    "qweb"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:xml"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "ruxx.restartServer",
+        "title": "ruxx: Restart language server"
+      },
+      {
+        "command": "ruxx.showOutput",
+        "title": "ruxx: Show output channel"
+      }
+    ],
+    "configuration": {
+      "title": "ruxx",
+      "properties": {
+        "ruxx.binaryPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Path to the `ruxx` binary. Leave empty to use a `ruxx` binary next to the extension, or `ruxx` on `PATH`."
+        },
+        "ruxx.configPath": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Value passed as `--config <path>`. Leave empty to use `.ruxx.toml` discovery from each file's directory."
+        },
+        "ruxx.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Trace the JSON-RPC traffic between VS Code and the ruxx language server."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "esbuild src/extension.ts --bundle --platform=node --format=cjs --target=node20 --external:vscode --sourcemap --outfile=dist/extension.js",
+    "watch": "npm run build -- --watch",
+    "compile": "tsc -p . --noEmit",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/vscode": "^1.91.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.28.0",
+    "typescript": "^5.9.0"
+  }
+}

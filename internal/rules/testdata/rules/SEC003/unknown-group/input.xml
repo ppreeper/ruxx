@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="r" model="ir.ui.view" groups="mymodule.ghost"/>
+</odoo>

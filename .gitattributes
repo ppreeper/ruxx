@@ -1,0 +1,10 @@
+# Normalize text files to LF in the repository.
+* text=auto eol=lf
+
+# Test fixtures that must keep their CRLF bytes verbatim: git must not
+# normalize these, or the CRLF/line-ending tests would fail on a fresh clone.
+internal/rules/testdata/rules/X005/crlf/input.xml -text
+internal/formatter/testdata/format/line-ending-crlf/expected.xml -text
+internal/formatter/testdata/format/line-ending-auto-crlf/input.xml -text
+internal/formatter/testdata/format/line-ending-auto-crlf/expected.xml -text
+internal/formatter/testdata/format/line-ending-lf/input.xml -text

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="v" model="ir.ui.view">
+        <field name="arch" type="xml"><form/></field>
+        <field name="name">V</field>
+    </record>
+</odoo>

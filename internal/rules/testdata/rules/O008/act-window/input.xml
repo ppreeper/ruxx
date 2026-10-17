@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <act_window id="a" name="A" res_model="res.partner"/>
+</odoo>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<templates xml:space="preserve">
+    <t t-name="demo.Row">
+        <span t-esc="record.name"/>
+    </t>
+</templates>

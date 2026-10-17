@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <report id="r" string="R" model="res.partner" report_type="qweb-pdf"/>
+</odoo>

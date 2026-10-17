@@ -1,0 +1,1 @@
+QW006 6:22 OWL directive "t-on-click" is not allowed in a view arch

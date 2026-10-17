@@ -1,0 +1,1 @@
+XP007 6:17 position="attributes" requires <attribute name="..."> children

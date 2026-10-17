@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="demo.Row">
+        <div class="x" t-if="cond"/>
+    </template>
+</odoo>

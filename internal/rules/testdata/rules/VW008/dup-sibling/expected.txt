@@ -1,0 +1,1 @@
+VW008 8:21 duplicate <field name="x"> among siblings

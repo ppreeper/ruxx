@@ -1,0 +1,1 @@
+SEC002 1:1 "security/ir.model.access.csv" is not listed in the manifest "data"

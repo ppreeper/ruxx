@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <data noupdate="yes">
+        <record id="a" model="ir.ui.view"/>
+    </data>
+</odoo>

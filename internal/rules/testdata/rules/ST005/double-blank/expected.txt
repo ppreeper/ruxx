@@ -1,0 +1,1 @@
+ST005 3:1 multiple consecutive blank lines

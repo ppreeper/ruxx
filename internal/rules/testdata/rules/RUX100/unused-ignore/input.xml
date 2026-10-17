@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<!-- ruxx: ignore[O004] -->
+<odoo>
+    <record id="a" model="ir.ui.view"/>
+</odoo>

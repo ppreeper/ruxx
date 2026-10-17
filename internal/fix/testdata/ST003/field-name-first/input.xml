@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <field widget="many2one" readonly="1" name="partner_id"/>
+</odoo>

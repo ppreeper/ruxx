@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="v" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="x"/>
+                    <field name="x"/>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

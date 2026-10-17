@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <div class="a" id="b" t-if="c"/>
+</odoo>

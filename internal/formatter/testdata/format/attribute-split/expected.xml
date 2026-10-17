@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="a" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <form>
+                <field
+                    name="partner_id"
+                    widget="many2one"
+                    options="{'no_create': True}"
+                    domain="[('active','=',True)]"
+                />
+            </form>
+        </field>
+    </record>
+</odoo>

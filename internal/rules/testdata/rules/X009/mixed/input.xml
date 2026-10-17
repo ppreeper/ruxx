@@ -1,0 +1,4 @@
+<odoo>
+	<record id="a" model="m"/>
+    <record id="b" model="m"/>
+</odoo>

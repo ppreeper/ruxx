@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<foo>
+    <record id="a" model="ir.ui.view"/>
+</foo>

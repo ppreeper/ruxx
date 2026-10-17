@@ -1,0 +1,1 @@
+SEC003 3:5 group "mymodule.ghost" is not defined in module "mymodule"

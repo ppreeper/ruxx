@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="v" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <form>
+                <h1>
+                    <field id="company"/>
+                    <field id="company"/>
+                </h1>
+            </form>
+        </field>
+    </record>
+</odoo>

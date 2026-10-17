@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="r" model="ir.rule">
+        <field name="name">My Rule</field>
+    </record>
+</odoo>

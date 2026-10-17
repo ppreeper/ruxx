@@ -1,0 +1,1 @@
+XP003 6:17 invalid position "bogus"; expected before, after, inside, replace, attributes, or move

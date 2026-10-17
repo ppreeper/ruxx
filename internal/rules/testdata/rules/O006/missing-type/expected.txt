@@ -1,0 +1,1 @@
+O006 4:9 <field name="arch"> should declare type="xml"

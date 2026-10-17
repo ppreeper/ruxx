@@ -1,0 +1,1 @@
+QW007 6:22 the "__comp__" attribute is not allowed in arch

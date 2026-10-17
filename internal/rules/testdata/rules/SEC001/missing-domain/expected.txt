@@ -1,0 +1,1 @@
+SEC001 3:5 <record model="ir.rule"> should define <field name="domain_force">

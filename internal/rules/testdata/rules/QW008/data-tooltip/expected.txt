@@ -1,0 +1,1 @@
+QW008 6:22 the "data-tooltip" attribute is not allowed in arch; use tooltip

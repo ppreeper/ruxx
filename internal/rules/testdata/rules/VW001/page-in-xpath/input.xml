@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="v" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <form>
+                <xpath expr="//notebook" position="inside">
+                    <page name="x" string="X"/>
+                </xpath>
+            </form>
+        </field>
+    </record>
+</odoo>

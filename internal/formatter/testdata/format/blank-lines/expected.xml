@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2026 Example
+-->
+
+<odoo>
+    <record id="a" model="ir.ui.view">
+        <field name="name">A</field>
+
+        <field name="model">x</field>
+    </record>
+</odoo>

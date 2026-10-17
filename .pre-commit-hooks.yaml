@@ -1,0 +1,30 @@
+# pre-commit hooks for ruxx — https://pre-commit.com
+#
+#   repos:
+#     - repo: https://github.com/ppreeper/ruxx
+#       rev: v0.1.0
+#       hooks:
+#         - id: ruxx-check
+#         - id: ruxx-format
+#
+# `language: golang` makes pre-commit build the binary from source, so no
+# pre-built ruxx is needed (a Go toolchain is). `--force-exclude` makes the
+# `exclude`/`extend-exclude` patterns in .ruxx.toml apply to the files
+# pre-commit passes explicitly, exactly like the ruff hooks do.
+
+- id: ruxx-check
+  name: ruxx check
+  description: Lint XML and Odoo XML files (Odoo-aware rules, no writes).
+  entry: ruxx check
+  language: golang
+  files: \.(xml|qweb|xml\.template)$
+  args: [--force-exclude]
+
+- id: ruxx-format
+  name: ruxx format
+  description: Format XML and Odoo XML files in place.
+  entry: ruxx format
+  language: golang
+  files: \.(xml|qweb|xml\.template)$
+  args: [--force-exclude]
+  require_serial: true

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <field name="partner_id" widget="many2one"/>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="t">
+        <script>
+            <![CDATA[
+                var x = 1 < 2;
+            ]]>
+        </script>
+    </template>
+</odoo>

@@ -1,0 +1,1 @@
+QW010 4:21 "t-foreach" is out of the canonical QWeb directive order

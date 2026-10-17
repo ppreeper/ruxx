@@ -1,0 +1,1 @@
+XP010 3:5 inherited view records must not define "groups"

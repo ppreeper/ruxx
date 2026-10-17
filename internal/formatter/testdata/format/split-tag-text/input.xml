@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<odoo>
+    <field name="x" widget="y">A</field>
+</odoo>

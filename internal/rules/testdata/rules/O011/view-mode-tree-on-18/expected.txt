@@ -1,0 +1,1 @@
+O011 4:9 view_mode uses "tree", which was renamed to "list" in Odoo 18.0

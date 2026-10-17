@@ -1,0 +1,1 @@
+O007 3:5 "noupdate" belongs on <odoo>/<data>, not <record>

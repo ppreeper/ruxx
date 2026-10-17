@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<odoo>
+    <record model="ir.ui.view" id="v">
+        <field type="xml" name="arch">
+            <form>
+                <div class="a" id="b" t-if="c"/>
+                <field widget="many2one" readonly="1" name="partner_id"/>
+            </form>
+        </field>
+    </record>
+</odoo>

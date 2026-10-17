@@ -1,0 +1,3 @@
+<templates xml:space="preserve">
+    <t t-name="mymodule.Widget">hi</t>
+</templates>

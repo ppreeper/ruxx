@@ -1,0 +1,1 @@
+RUX101 2:1 unknown rule code "ZZ999"

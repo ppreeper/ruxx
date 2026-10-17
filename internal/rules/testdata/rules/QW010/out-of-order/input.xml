@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="demo.Row">
+        <t t-if="a" t-foreach="b" t-as="c">x</t>
+    </template>
+</odoo>

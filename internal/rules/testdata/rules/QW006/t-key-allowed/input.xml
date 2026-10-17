@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="v" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <form>
+                <div t-foreach="records" t-as="o" t-key="o"/>
+            </form>
+        </field>
+    </record>
+</odoo>

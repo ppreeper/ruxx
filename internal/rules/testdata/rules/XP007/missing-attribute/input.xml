@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="v" model="ir.ui.view">
+        <field name="arch" type="xml">
+            <form>
+                <xpath expr="//field[@name='x']" position="attributes">
+                    <field name="readonly"/>
+                </xpath>
+            </form>
+        </field>
+    </record>
+</odoo>

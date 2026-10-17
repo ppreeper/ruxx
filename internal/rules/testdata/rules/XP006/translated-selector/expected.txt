@@ -1,0 +1,1 @@
+XP006 6:24 expression uses translated attribute "@string" as a selector

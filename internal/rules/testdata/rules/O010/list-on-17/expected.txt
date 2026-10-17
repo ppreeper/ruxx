@@ -1,0 +1,1 @@
+O010 5:13 <list> requires Odoo 18.0+; use <tree>

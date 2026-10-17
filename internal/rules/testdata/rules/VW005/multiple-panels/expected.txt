@@ -1,0 +1,1 @@
+VW005 7:17 <search> may contain at most one <searchpanel>

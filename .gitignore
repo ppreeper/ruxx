@@ -31,3 +31,8 @@ go.work.sum
 # Editor/IDE
 # .idea/
 # .vscode/
+.ruxx_cache/
+
+# Build output
+/bin/
+/dist/

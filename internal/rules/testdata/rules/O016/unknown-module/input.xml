@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="r" model="ir.ui.view">
+        <field name="inherit_id" ref="missingmod.view_x"/>
+    </record>
+</odoo>

@@ -1,0 +1,1 @@
+VW003 6:17 <list> may only contain <field>, <button>, <control>, <groupby>, <widget>, or <header> elements

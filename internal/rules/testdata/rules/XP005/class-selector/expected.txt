@@ -1,0 +1,1 @@
+XP005 6:24 avoid "@class" in the expression; use hasclass(...)
