@@ -122,6 +122,55 @@ func TestCollect_ForceExcludeOnExplicit(t *testing.T) {
 	}
 }
 
+// A bare directory name must match an explicit file path as the user gave it:
+// `exclude = ["vendor"]` plus `--force-exclude vendor/a.xml`. Matching against
+// the file's own directory instead made this impossible.
+func TestCollect_ForceExcludeBareNameOnExplicit(t *testing.T) {
+	root := t.TempDir()
+	file := filepath.Join(root, "vendor", "a.xml")
+	touch(t, file, "<odoo/>")
+	keep := filepath.Join(root, "root.xml")
+	touch(t, keep, "<odoo/>")
+
+	o := opts()
+	o.Exclude = []string{"vendor"}
+	o.ForceExclude = true
+
+	got, err := walk.Collect([]string{file}, o)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(got) != 0 {
+		t.Errorf("got %v, want the excluded file skipped", got)
+	}
+
+	got, err = walk.Collect([]string{keep}, o)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(got) != 1 {
+		t.Errorf("got %v, want root.xml kept", got)
+	}
+}
+
+// Without ForceExclude an explicit file is analysed even when it is excluded.
+func TestCollect_ExplicitFileBypassesExclude(t *testing.T) {
+	root := t.TempDir()
+	file := filepath.Join(root, "vendor", "a.xml")
+	touch(t, file, "<odoo/>")
+
+	o := opts()
+	o.Exclude = []string{"vendor"}
+
+	got, err := walk.Collect([]string{file}, o)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(got) != 1 {
+		t.Errorf("got %v, want the explicit file analysed", got)
+	}
+}
+
 func TestCollect_Gitignore(t *testing.T) {
 	root := t.TempDir()
 	touch(t, filepath.Join(root, ".gitignore"), "ignored.xml\n/root_only.xml\n!keep.xml\nsub/\n")

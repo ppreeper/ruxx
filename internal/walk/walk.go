@@ -60,7 +60,9 @@ func Collect(roots []string, opts Options) ([]string, error) {
 			return nil, err
 		}
 		if !info.IsDir() {
-			if opts.ForceExclude && matchAny(opts.Exclude, root, filepath.Dir(root)) {
+			// An explicit file has no walk root, so bare names must be matched
+			// against every component of the path as the user gave it.
+			if opts.ForceExclude && matchAny(opts.Exclude, root, "") {
 				continue
 			}
 			add(root)
