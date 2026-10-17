@@ -479,7 +479,8 @@ func matchGlob(pattern, path string) bool {
 	if re == nil {
 		return false
 	}
-	return re.MatchString(path)
+	// Glob patterns are written with forward slashes; a Windows path is not.
+	return re.MatchString(filepath.ToSlash(path))
 }
 
 func globToRegexp(pattern string) *regexp.Regexp {

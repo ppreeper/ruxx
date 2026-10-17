@@ -262,16 +262,22 @@ func (w *walker) ignored(path string, isDir bool) bool {
 }
 
 // matchFile reports whether gi has an opinion about path and whether that
-// opinion is "ignored". A nil file never matches.
+// opinion is "ignored". A nil file never matches. An empty base means the rules
+// are matched against the absolute path, which is how the user-level gitignore
+// is applied (its rules are not anchored to any particular directory).
 func matchFile(gi *gitignoreFile, path string, isDir bool) (matched, ignored bool) {
 	if gi == nil {
 		return false, false
 	}
-	rel, err := filepath.Rel(gi.base, path)
-	if err != nil {
-		return false, false
+	rel := filepath.ToSlash(path)
+	if gi.base != "" {
+		r, err := filepath.Rel(gi.base, path)
+		if err != nil {
+			return false, false
+		}
+		rel = filepath.ToSlash(r)
 	}
-	return gi.match(filepath.ToSlash(rel), isDir)
+	return gi.match(rel, isDir)
 }
 
 // ignoresFor returns the ignore files in dir, loading them on first use. The
@@ -349,7 +355,7 @@ func (w *walker) globalIgnores() *gitignoreFile {
 		}
 		dir = filepath.Join(home, ".config")
 	}
-	w.globals = loadIgnoreFile(filepath.Join(dir, "git", "ignore"), string(filepath.Separator))
+	w.globals = loadIgnoreFile(filepath.Join(dir, "git", "ignore"), "")
 	return w.globals
 }
 

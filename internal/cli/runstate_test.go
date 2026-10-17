@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"testing"
 )
@@ -76,6 +77,10 @@ func TestCheck_IndexSharedAcrossWorkers(t *testing.T) {
 	}
 }
 
+// diagLineRE parses a concise diagnostic line: `path:line:col: CODE message`.
+// A greedy path group keeps Windows drive letters (`C:\...`) intact.
+var diagLineRE = regexp.MustCompile(`^(.+):\d+:\d+: ([A-Z]+\d+) `)
+
 func TestCheck_PerDirectoryConfig(t *testing.T) {
 	root := t.TempDir()
 	// The parent config reports record-missing-model; the nested one reports
@@ -92,17 +97,12 @@ func TestCheck_PerDirectoryConfig(t *testing.T) {
 	}
 	codes := map[string][]string{}
 	for _, line := range strings.Split(strings.TrimSpace(stdout), "\n") {
-		i := strings.Index(line, ":")
-		if i < 0 {
+		m := diagLineRE.FindStringSubmatch(line)
+		if m == nil {
 			continue
 		}
-		rest := line[i+1:]
-		j := strings.Index(rest, ": ")
-		if j < 0 {
-			continue
-		}
-		base := filepath.Base(line[:i])
-		codes[base] = append(codes[base], strings.Fields(rest[j+2:])[0])
+		base := filepath.Base(m[1])
+		codes[base] = append(codes[base], m[2])
 	}
 	if got := codes["a.xml"]; len(got) != 1 || got[0] != "O004" {
 		t.Errorf("a.xml codes = %v, want [O004]\n%s", got, stdout)

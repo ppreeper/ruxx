@@ -2,6 +2,7 @@ package cli_test
 
 import (
 	"fmt"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -38,7 +39,7 @@ func TestCheck_ParallelOutputIsDeterministic(t *testing.T) {
 		t.Fatalf("got %d diagnostics, want %d:\n%s", len(lines), n, first)
 	}
 	for i, line := range lines {
-		want := fmt.Sprintf("%s/f%02d.xml:3:5:", dir, i)
+		want := fmt.Sprintf("%s:3:5:", filepath.Join(dir, fmt.Sprintf("f%02d.xml", i)))
 		if !strings.HasPrefix(line, want) {
 			t.Fatalf("line %d = %q, want prefix %q", i, line, want)
 		}
@@ -63,7 +64,7 @@ func TestFormat_ParallelOutputIsDeterministic(t *testing.T) {
 		t.Fatalf("got %d verdicts, want %d:\n%s", len(lines), n, stdout)
 	}
 	for i, line := range lines {
-		want := fmt.Sprintf("would reformat %s/f%02d.xml", dir, i)
+		want := "would reformat " + filepath.Join(dir, fmt.Sprintf("f%02d.xml", i))
 		if line != want {
 			t.Fatalf("line %d = %q, want %q", i, line, want)
 		}
