@@ -138,8 +138,8 @@ stdio client for `ruxx server`, so it uses whatever `ruxx` binary you have:
 $ cd editors/vscode
 $ npm install
 $ npm run build          # bundles src/ into dist/extension.js
-$ npm run package        # ruxx-xml-0.1.0.vsix
-$ code --install-extension ruxx-xml-0.1.0.vsix
+$ npm run package        # ruxx-xml-0.1.1.vsix
+$ code --install-extension ruxx-xml-0.1.1.vsix
 ```
 
 Or open `editors/vscode` in VS Code and press <kbd>F5</kbd> to run it in an

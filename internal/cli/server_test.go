@@ -52,3 +52,30 @@ func TestServer_DidOpenPublishesDiagnostics(t *testing.T) {
 		t.Fatalf("stdout missing O004: %q", stdout)
 	}
 }
+
+// vscode-languageclient appends `--stdio --clientProcessId=<pid>` when it
+// launches an Executable server with the stdio transport; the server must
+// accept (and ignore) both instead of exiting with "unknown flag".
+func TestServer_AcceptsLSPClientFlags(t *testing.T) {
+	var in strings.Builder
+	in.WriteString(lspFrame(t, map[string]any{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": map[string]any{}}))
+	in.WriteString(lspFrame(t, map[string]any{"jsonrpc": "2.0", "method": "initialized", "params": map[string]any{}}))
+	in.WriteString(lspFrame(t, map[string]any{"jsonrpc": "2.0", "id": 2, "method": "shutdown"}))
+	in.WriteString(lspFrame(t, map[string]any{"jsonrpc": "2.0", "method": "exit"}))
+
+	code, stdout, stderr := run(t, in.String(), "server", "--stdio", "--clientProcessId=1234")
+	if code != cli.ExitClean {
+		t.Fatalf("exit = %d, stderr = %q", code, stderr)
+	}
+	if !strings.Contains(stdout, "textDocumentSync") {
+		t.Fatalf("stdout missing capabilities: %q", stdout)
+	}
+}
+
+// The compatibility flags belong to the server; other subcommands still
+// reject unknown flags.
+func TestServer_StdioFlagRejectedElsewhere(t *testing.T) {
+	if code, _, _ := run(t, "", "check", "--stdio"); code != cli.ExitAbnormal {
+		t.Errorf("check --stdio: exit = %d, want %d", code, cli.ExitAbnormal)
+	}
+}

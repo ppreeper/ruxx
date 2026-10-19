@@ -186,6 +186,8 @@ Flags configure how settings and the cross-file index are resolved:
 			{"--isolated", "ignore all config files"},
 			{"-n, --no-cache", "bypass the caches (env RUXX_NO_CACHE)"},
 			{"--cache-dir <DIR>", "cache location (env RUXX_CACHE_DIR)"},
+			{"--stdio", "accepted for LSP-client compatibility (ignored)"},
+			{"--clientProcessId <PID>", "accepted for LSP-client compatibility (ignored)"},
 			{"-h, --help", "print this help"},
 		}},
 	})

@@ -49,8 +49,8 @@ cd editors/vscode
 npm install
 npm run build        # bundles src/ into dist/extension.js
 npm run compile      # type-check only
-npm run package      # produces ruxx-xml-0.1.0.vsix
-code --install-extension ruxx-xml-0.1.0.vsix
+npm run package      # produces ruxx-xml-0.1.1.vsix
+code --install-extension ruxx-xml-0.1.1.vsix
 ```
 
 To hack on the extension, open this folder in VS Code and press <kbd>F5</kbd>
