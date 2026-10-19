@@ -23,7 +23,12 @@ relative to the CLI.
 
 ## Requirements
 
-The `ruxx` binary must be available. Either:
+**Installed from the Marketplace or Open VSX: nothing to install.** Each
+platform package (`linux-x64`, `linux-arm64`, `darwin-x64`, `darwin-arm64`,
+`win32-x64`, `win32-arm64`) ships the matching `ruxx` binary, so the extension
+works out of the box. On a platform with no specific package — the generic
+package, or another architecture — the extension falls back to a `ruxx` on
+`PATH`:
 
 ```sh
 go install github.com/ppreeper/ruxx/cmd/ruxx@latest
@@ -49,8 +54,9 @@ cd editors/vscode
 npm install
 npm run build        # bundles src/ into dist/extension.js
 npm run compile      # type-check only
-npm run package      # produces ruxx-xml-0.1.1.vsix
-code --install-extension ruxx-xml-0.1.1.vsix
+npm run package          # generic package, no bundled binary
+npm run package:targets  # six platform packages, each bundling the binary
+code --install-extension ruxx-xml-0.1.1@linux-x64.vsix
 ```
 
 To hack on the extension, open this folder in VS Code and press <kbd>F5</kbd>

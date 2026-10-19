@@ -131,15 +131,33 @@ args = ["server"]
 
 ### VS Code
 
-A thin LSP client ships in [`editors/vscode`](../editors/vscode). It is a plain
-stdio client for `ruxx server`, so it uses whatever `ruxx` binary you have:
+Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=ppreeper.ruxx-xml):
+
+```console
+$ code --install-extension ppreeper.ruxx-xml
+```
+
+Cursor, VSCodium, Theia and Gitpod install from
+[Open VSX](https://open-vsx.org/extension/ppreeper/ruxx-xml) instead; it is the
+same extension under the same id.
+
+**Nothing else to install.** Each platform package (`linux-x64`, `linux-arm64`,
+`darwin-x64`, `darwin-arm64`, `win32-x64`, `win32-arm64`) bundles the matching
+`ruxx` binary, so diagnostics and formatting work out of the box. On a platform
+with no specific package — the generic package, or another architecture — the
+extension falls back to a `ruxx` on `PATH`.
+
+The client is a thin LSP client: all linting and formatting happens in the
+`ruxx` binary, so the extension never goes out of date relative to the CLI. To
+build one from a checkout:
 
 ```console
 $ cd editors/vscode
 $ npm install
-$ npm run build          # bundles src/ into dist/extension.js
-$ npm run package        # ruxx-xml-0.1.1.vsix
-$ code --install-extension ruxx-xml-0.1.1.vsix
+$ npm run compile         # type-check
+$ npm run package         # generic package, no bundled binary
+$ npm run package:targets # six platform packages, each with the binary
+$ code --install-extension ruxx-xml-0.1.1@linux-x64.vsix
 ```
 
 Or open `editors/vscode` in VS Code and press <kbd>F5</kbd> to run it in an

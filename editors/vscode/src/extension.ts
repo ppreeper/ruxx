@@ -20,9 +20,14 @@ function resolveBinary(): string {
 	if (configured.length > 0) {
 		return configured;
 	}
-	const bundled = path.join(__dirname, '..', 'ruxx');
-	if (fs.existsSync(bundled)) {
-		return bundled;
+	// A platform-specific package ships the matching binary at the extension
+	// root (ruxx.exe on Windows).
+	const names = process.platform === 'win32' ? ['ruxx.exe', 'ruxx'] : ['ruxx'];
+	for (const name of names) {
+		const bundled = path.join(__dirname, '..', name);
+		if (fs.existsSync(bundled)) {
+			return bundled;
+		}
 	}
 	return 'ruxx';
 }
