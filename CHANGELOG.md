@@ -6,6 +6,16 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-18
+
+### Fixed
+
+- `ruxx server` now accepts the `--stdio` and `--clientProcessId` flags that
+  LSP clients add when they launch a stdio server. VS Code's
+  `vscode-languageclient` appends `--stdio` to an `Executable`, so the server
+  previously exited with `unknown flag "--stdio"`, which surfaced in the editor
+  as `write EPIPE` and a restart loop.
+
 ## [0.1.0] - 2026-10-17
 
 First release. `ruxx check` and `ruxx format` share one lossless XML parser,
@@ -60,5 +70,6 @@ so the linter and the formatter always agree about what a file says.
 - Only `.gitignore` is honored for file selection; `.ignore`,
   `.git/info/exclude`, and the global gitignore are not read yet.
 
-[Unreleased]: https://github.com/ppreeper/ruxx/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ppreeper/ruxx/compare/v0.1.1...HEAD
+[0.1.1]: https://github.com/ppreeper/ruxx/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/ppreeper/ruxx/releases/tag/v0.1.0

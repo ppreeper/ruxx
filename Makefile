@@ -10,7 +10,7 @@ GO      ?= go
 # Version stamp: the nearest release tag when there is one, else the dev default.
 VERSION ?= $(shell git describe --tags --abbrev=0 2>/dev/null | sed -e 's/^v//')
 ifeq ($(strip $(VERSION)),)
-VERSION := 0.1.0-dev
+VERSION := 0.1.1-dev
 endif
 COMMIT  ?= $(shell git rev-parse --short HEAD 2>/dev/null)
 DATE    ?= $(shell date -u +%Y-%m-%dT%H:%M:%SZ)

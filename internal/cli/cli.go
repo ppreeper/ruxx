@@ -159,6 +159,14 @@ type options struct {
 	// formatRange is the parsed --range selection; it only applies to
 	// `ruxx format`.
 	formatRange *rangeLines
+
+	// lspStdio and lspClientPID record transport flags that LSP clients add
+	// when they launch `ruxx server` (vscode-languageclient sends
+	// `--stdio --clientProcessId=<pid>`). The server always speaks stdio, so
+	// both are accepted and ignored; they are rejected for every other
+	// subcommand.
+	lspStdio     bool
+	lspClientPID bool
 }
 
 // rangeLines is a parsed `--range start_line:col-end_line:col` selection, with
@@ -440,6 +448,17 @@ func parseArgs(args []string, cmd string) (*options, error) {
 			o.verbose = true
 		case "--exit-non-zero-on-format":
 			o.exitNonZeroOnFormat = true
+		case "--stdio":
+			// LSP clients commonly pass --stdio to select the transport; the
+			// server only speaks stdio, so accept and ignore it.
+			o.lspStdio = true
+		case "--clientProcessId":
+			// vscode-languageclient passes --clientProcessId=<pid>; accept
+			// and ignore it.
+			if _, err := needValue(name, inline); err != nil {
+				return nil, err
+			}
+			o.lspClientPID = true
 		default:
 			return nil, fmt.Errorf("unknown flag %q", a)
 		}
@@ -449,6 +468,12 @@ func parseArgs(args []string, cmd string) (*options, error) {
 	}
 	if o.exitNonZeroOnFormat && cmd != "format" {
 		return nil, fmt.Errorf("--exit-non-zero-on-format is only supported by ruxx format")
+	}
+	if o.lspStdio && cmd != "server" {
+		return nil, fmt.Errorf("--stdio is only supported by ruxx server")
+	}
+	if o.lspClientPID && cmd != "server" {
+		return nil, fmt.Errorf("--clientProcessId is only supported by ruxx server")
 	}
 	if len(o.paths) == 0 {
 		o.paths = []string{"."}

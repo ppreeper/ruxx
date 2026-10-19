@@ -2,7 +2,7 @@
   "name": "ruxx-xml",
   "displayName": "ruxx — XML linter & formatter",
   "description": "Odoo-aware XML linting, formatting and quick fixes, powered by the ruxx language server.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "publisher": "ppreeper",
   "repository": {
