@@ -95,20 +95,26 @@ if [ -z "${VSCE_PAT:-}" ] && [ -z "${OVSX_PAT:-}" ]; then
 Neither VSCE_PAT nor OVSX_PAT is set, so nothing was published.
 
 Publish by hand with:
-  npx vsce publish --packagePath ruxx-xml-$VERSION@<target>.vsix
+  npx vsce publish --packagePath ruxx-xml-$VERSION@*.vsix ruxx-xml-$VERSION.vsix -p <pat>
   npx ovsx publish ruxx-xml-$VERSION@<target>.vsix -p <open-vsx-token>
 EOF
 	exit 0
 fi
 
-for vsix in "${VSIXES[@]}"; do
-	name="$(basename "$vsix")"
-	if [ -n "${VSCE_PAT:-}" ]; then
-		echo "==> vsce publish $name"
-		npx --no-install vsce publish --packagePath "$vsix" -p "$VSCE_PAT"
-	fi
-	if [ -n "${OVSX_PAT:-}" ]; then
-		echo "==> ovsx publish $name"
+# The Marketplace must receive every platform package (plus the universal
+# fallback) for a version, otherwise VS Code on an unpublished platform reports
+# the extension as "not available" for that architecture. Publish them all in a
+# single vsce invocation, matching microsoft/vscode-platform-specific-sample;
+# publishing one VSIX per invocation can leave targets missing from the listing.
+if [ -n "${VSCE_PAT:-}" ]; then
+	echo "==> vsce publish ${#VSIXES[@]} package(s)"
+	npx --no-install vsce publish --packagePath "${VSIXES[@]}" -p "$VSCE_PAT"
+fi
+
+# Open VSX takes one VSIX per invocation.
+if [ -n "${OVSX_PAT:-}" ]; then
+	for vsix in "${VSIXES[@]}"; do
+		echo "==> ovsx publish $(basename "$vsix")"
 		npx --yes ovsx publish "$vsix" -p "$OVSX_PAT"
-	fi
-done
+	done
+fi
